@@ -5,6 +5,7 @@
   "main": "RandomSoundsNFT.sol",
   "scripts": {
     "compile": "hardhat compile",
+    "prepare": "pnpm compile",
     "deploy:dev": "hardhat run scripts/deploy.ts --network localhost"
   },
   "types": "./typechain/index.ts",
