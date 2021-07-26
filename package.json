@@ -1,6 +1,6 @@
 {
   "name": "@randomsounds/contracts",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "📜 Solidity contract for random sounds NFT",
   "main": "RandomSoundsNFT.sol",
   "scripts": {
@@ -8,6 +8,9 @@
     "prepare": "pnpm compile",
     "deploy:dev": "hardhat run scripts/deploy.ts --network localhost"
   },
+  "files": [
+  	"artifacts", "typechain", "contracts"
+  ],
   "types": "./typechain/index.ts",
   "repository": {
     "type": "git",
