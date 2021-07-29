@@ -1,11 +1,11 @@
 {
   "name": "@randomsounds/contracts",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "📜 Solidity contract for random sounds NFT",
   "main": "RandomSoundsNFT.sol",
   "scripts": {
     "compile": "hardhat compile",
-    "prepare": "pnpm compile",
+    "prepare": "pnpm test",
     "deploy:dev": "hardhat run scripts/deploy.ts --network localhost",
     "test": "hardhat test"
   },
