@@ -9,39 +9,50 @@ import '@typechain/hardhat'
 import '@nomiclabs/hardhat-ethers'
 import '@nomiclabs/hardhat-waffle'
 
+// TODO: reenable solidity-coverage when it works
+// import "solidity-coverage";
 const PRIVATE_KEY = process.env.PRIVATE_KEY || ''
 
 const config: HardhatUserConfig = {
   defaultNetwork: 'hardhat',
   solidity: {
-    version: '0.8.6',
+    version: '0.8.4',
     settings: {
       optimizer: {
         enabled: true,
-        runs: 200
-      }
-    }
+        runs: 200,
+      },
+    },
   },
   paths: {
     tests: './tests',
+
     cache: './cache',
-    artifacts: './artifacts'
+    artifacts: './artifacts',
   },
   networks: {
     hardhat: {
       chainId: 1337, // TO WORK WITH METAMASK
       gas: 8000000,
       gasPrice: 1,
-      blockGasLimit: 15000000
     },
-    localhost: {}
-  }
+    matic: {
+      url: 'https://rpc-mumbai.maticvigil.com',
+      accounts: [PRIVATE_KEY],
+      chainId: 80001,
+    },
+    localhost: {},
+  },
 }
 
 export default config
 
-task('blockNumber', 'Prints the current block number', async (_, { ethers }) => {
-  await ethers.provider.getBlockNumber().then((blockNumber) => {
-    console.log('Current block number: ' + blockNumber)
-  })
-})
+task(
+  'blockNumber',
+  'Prints the current block number',
+  async (_, { ethers }) => {
+    await ethers.provider.getBlockNumber().then((blockNumber) => {
+      console.log('Current block number: ' + blockNumber)
+    })
+  }
+)

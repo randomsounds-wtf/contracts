@@ -6,10 +6,13 @@
   "scripts": {
     "compile": "hardhat compile",
     "prepare": "pnpm compile",
-    "deploy:dev": "hardhat run scripts/deploy.ts --network localhost"
+    "deploy:dev": "hardhat run scripts/deploy.ts --network localhost",
+    "test": "hardhat test"
   },
   "files": [
-  	"artifacts", "typechain", "contracts"
+    "artifacts",
+    "typechain",
+    "contracts"
   ],
   "types": "./typechain/index.ts",
   "repository": {
@@ -39,7 +42,6 @@
     "@typechain/hardhat": "^2.2.0",
     "@types/mocha": "^9.0.0",
     "@types/node": "^16.4.2",
-    "chai": "^4.3.4",
     "dotenv": "^10.0.0",
     "ethereum-waffle": "^3.4.0",
     "ethers": "^5.4.2",

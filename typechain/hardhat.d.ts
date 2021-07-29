@@ -2,62 +2,62 @@
 /* tslint:disable */
 /* eslint-disable */
 
-import { ethers } from "ethers";
+import { ethers } from 'ethers'
 import {
   FactoryOptions,
   HardhatEthersHelpers as HardhatEthersHelpersBase,
-} from "@nomiclabs/hardhat-ethers/types";
+} from '@nomiclabs/hardhat-ethers/types'
 
-import * as Contracts from ".";
+import * as Contracts from '.'
 
-declare module "hardhat/types/runtime" {
+declare module 'hardhat/types/runtime' {
   interface HardhatEthersHelpers extends HardhatEthersHelpersBase {
     getContractFactory(
-      name: "Ownable",
+      name: 'Ownable',
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.Ownable__factory>;
+    ): Promise<Contracts.Ownable__factory>
     getContractFactory(
-      name: "ERC721",
+      name: 'ERC721',
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ERC721__factory>;
+    ): Promise<Contracts.ERC721__factory>
     getContractFactory(
-      name: "ERC721URIStorage",
+      name: 'ERC721URIStorage',
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ERC721URIStorage__factory>;
+    ): Promise<Contracts.ERC721URIStorage__factory>
     getContractFactory(
-      name: "IERC721Metadata",
+      name: 'IERC721Metadata',
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.IERC721Metadata__factory>;
+    ): Promise<Contracts.IERC721Metadata__factory>
     getContractFactory(
-      name: "IERC721",
+      name: 'IERC721',
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.IERC721__factory>;
+    ): Promise<Contracts.IERC721__factory>
     getContractFactory(
-      name: "IERC721Receiver",
+      name: 'IERC721Receiver',
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.IERC721Receiver__factory>;
+    ): Promise<Contracts.IERC721Receiver__factory>
     getContractFactory(
-      name: "ERC165",
+      name: 'ERC165',
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.ERC165__factory>;
+    ): Promise<Contracts.ERC165__factory>
     getContractFactory(
-      name: "IERC165",
+      name: 'IERC165',
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.IERC165__factory>;
+    ): Promise<Contracts.IERC165__factory>
     getContractFactory(
-      name: "RandomSoundsNFT",
+      name: 'RandomSoundsNFT',
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<Contracts.RandomSoundsNFT__factory>;
+    ): Promise<Contracts.RandomSoundsNFT__factory>
 
     // default types
     getContractFactory(
       name: string,
       signerOrOptions?: ethers.Signer | FactoryOptions
-    ): Promise<ethers.ContractFactory>;
+    ): Promise<ethers.ContractFactory>
     getContractFactory(
       abi: any[],
       bytecode: ethers.utils.BytesLike,
       signer?: ethers.Signer
-    ): Promise<ethers.ContractFactory>;
+    ): Promise<ethers.ContractFactory>
   }
 }

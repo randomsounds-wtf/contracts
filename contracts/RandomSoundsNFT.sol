@@ -1,19 +1,27 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.6;
+pragma solidity ^0.8.4;
 
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
+import "hardhat/console.sol";
 
 contract RandomSoundsNFT is ERC721, Ownable, ERC721URIStorage {
+    struct URIwithID {
+        uint256 id;
+        string uri;
+    }
+
     event Mint(uint256 id);
     event Claim(uint256 id);
 
     uint256 public constant MAX_TOKENS = 50;
 
     uint256 private constant PRICE = 50000000000000000;
+
+    uint256 private constant MAX_GAS = 150000000000; // 150 gwei
 
     using SafeMath for uint256;
 
@@ -55,23 +63,74 @@ contract RandomSoundsNFT is ERC721, Ownable, ERC721URIStorage {
     }
 
     // Claim and mint NFT
-    function claim(uint256 id) external payable {
+    function claim(uint256 _tokenId) external payable {
         require(msg.value == PRICE, "Claiming an NFT costs 0.05 ETH");
-        require(id <= MAX_TOKENS, "Cannot claim non-existent token");
+        require(_tokenId <= MAX_TOKENS, "Only 50 NFTs were minted");
+        require(
+            msg.sender != address(0) && msg.sender != ownerOf(_tokenId),
+            "Non-existent address or already an owner"
+        );
 
-        // Transfer to seller
-        safeTransferFrom(address(this), msg.sender, id);
+        address _owner = ownerOf(_tokenId);
 
-        emit Claim(id);
+        payable(_owner).transfer(msg.value); // pay 0.05ETH to owner
+
+        setApprovalForAll(_owner, true); // approve buying NFTs
+        _transfer(_owner, msg.sender, _tokenId); // transfer NFT
+
+        emit Claim(_tokenId);
     }
 
-    // withdraw bobux
-    function withdraw() public onlyOwner {
+    // Get all token IDs of a token owner
+    function tokenIdsByOwner(address _owner)
+        public
+        view
+        returns (uint256[] memory)
+    {
+        uint256 tokenCount = balanceOf(_owner);
+
+        if (tokenCount == 0) {
+            return new uint256[](0);
+        } else {
+            uint256 i = 0;
+
+            uint256[] memory result = new uint256[](tokenCount);
+
+            for (uint256 _tokenId = 1; _tokenId <= 50; _tokenId++) {
+                if (ownerOf(_tokenId) == _owner) {
+                    result[i++] = _tokenId;
+                }
+            }
+
+            return result;
+        }
+    }
+
+    // Get token URIs and IDs in a single call
+    function tokenURIsAndIDsByOwner(address _owner)
+        public
+        view
+        returns (URIwithID[] memory)
+    {
+        uint256[] memory ids = tokenIdsByOwner(_owner);
+
+        if (ids.length == 0) {
+            return new URIwithID[](0);
+        }
+
+        URIwithID[] memory uris = new URIwithID[](ids.length);
+
+        for (uint256 i = 0; i < ids.length; i++) {
+            uris[i].uri = tokenURI(ids[i]);
+            uris[i].id = ids[i];
+        }
+
+        return uris;
+    }
+
+    // withdraw bobux from contract
+    function withdrawAll() public onlyOwner {
         uint256 balance = address(this).balance;
         payable(msg.sender).transfer(balance);
-    }
-
-    function transferTo(address acc, uint256 id) public onlyOwner {
-        safeTransferFrom(msg.sender, acc, id);
     }
 }
