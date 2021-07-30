@@ -14,494 +14,509 @@ import {
   Overrides,
   PayableOverrides,
   CallOverrides,
-} from 'ethers'
-import { BytesLike } from '@ethersproject/bytes'
-import { Listener, Provider } from '@ethersproject/providers'
-import { FunctionFragment, EventFragment, Result } from '@ethersproject/abi'
-import { TypedEventFilter, TypedEvent, TypedListener } from './commons'
+} from "ethers";
+import { BytesLike } from "@ethersproject/bytes";
+import { Listener, Provider } from "@ethersproject/providers";
+import { FunctionFragment, EventFragment, Result } from "@ethersproject/abi";
+import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
 
 interface RandomSoundsNFTInterface extends ethers.utils.Interface {
   functions: {
-    'MAX_TOKENS()': FunctionFragment
-    'approve(address,uint256)': FunctionFragment
-    'balanceOf(address)': FunctionFragment
-    'claim(uint256)': FunctionFragment
-    'getApproved(uint256)': FunctionFragment
-    'isApprovedForAll(address,address)': FunctionFragment
-    'mint(string)': FunctionFragment
-    'name()': FunctionFragment
-    'owner()': FunctionFragment
-    'ownerOf(uint256)': FunctionFragment
-    'renounceOwnership()': FunctionFragment
-    'safeTransferFrom(address,address,uint256)': FunctionFragment
-    'setApprovalForAll(address,bool)': FunctionFragment
-    'supportsInterface(bytes4)': FunctionFragment
-    'symbol()': FunctionFragment
-    'tokenIdsByOwner(address)': FunctionFragment
-    'tokenURI(uint256)': FunctionFragment
-    'tokenURIsAndIDsByOwner(address)': FunctionFragment
-    'transferFrom(address,address,uint256)': FunctionFragment
-    'transferOwnership(address)': FunctionFragment
-    'withdrawAll()': FunctionFragment
-  }
+    "MAX_TOKENS()": FunctionFragment;
+    "approve(address,uint256)": FunctionFragment;
+    "balanceOf(address)": FunctionFragment;
+    "claim(uint256)": FunctionFragment;
+    "getApproved(uint256)": FunctionFragment;
+    "isApprovedForAll(address,address)": FunctionFragment;
+    "mint(string)": FunctionFragment;
+    "name()": FunctionFragment;
+    "owner()": FunctionFragment;
+    "ownerOf(uint256)": FunctionFragment;
+    "renounceOwnership()": FunctionFragment;
+    "safeTransferFrom(address,address,uint256)": FunctionFragment;
+    "setApprovalForAll(address,bool)": FunctionFragment;
+    "supportsInterface(bytes4)": FunctionFragment;
+    "symbol()": FunctionFragment;
+    "tokenIdsByOwner(address)": FunctionFragment;
+    "tokenURI(uint256)": FunctionFragment;
+    "tokenURIsAndIDsByOwner(address)": FunctionFragment;
+    "transferFrom(address,address,uint256)": FunctionFragment;
+    "transferOwnership(address)": FunctionFragment;
+    "withdrawAll()": FunctionFragment;
+  };
 
-  encodeFunctionData(functionFragment: 'MAX_TOKENS', values?: undefined): string
   encodeFunctionData(
-    functionFragment: 'approve',
+    functionFragment: "MAX_TOKENS",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "approve",
     values: [string, BigNumberish]
-  ): string
-  encodeFunctionData(functionFragment: 'balanceOf', values: [string]): string
-  encodeFunctionData(functionFragment: 'claim', values: [BigNumberish]): string
+  ): string;
+  encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
+  encodeFunctionData(functionFragment: "claim", values: [BigNumberish]): string;
   encodeFunctionData(
-    functionFragment: 'getApproved',
+    functionFragment: "getApproved",
     values: [BigNumberish]
-  ): string
+  ): string;
   encodeFunctionData(
-    functionFragment: 'isApprovedForAll',
+    functionFragment: "isApprovedForAll",
     values: [string, string]
-  ): string
-  encodeFunctionData(functionFragment: 'mint', values: [string]): string
-  encodeFunctionData(functionFragment: 'name', values?: undefined): string
-  encodeFunctionData(functionFragment: 'owner', values?: undefined): string
+  ): string;
+  encodeFunctionData(functionFragment: "mint", values: [string]): string;
+  encodeFunctionData(functionFragment: "name", values?: undefined): string;
+  encodeFunctionData(functionFragment: "owner", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: 'ownerOf',
+    functionFragment: "ownerOf",
     values: [BigNumberish]
-  ): string
+  ): string;
   encodeFunctionData(
-    functionFragment: 'renounceOwnership',
+    functionFragment: "renounceOwnership",
     values?: undefined
-  ): string
+  ): string;
   encodeFunctionData(
-    functionFragment: 'safeTransferFrom',
+    functionFragment: "safeTransferFrom",
     values: [string, string, BigNumberish]
-  ): string
+  ): string;
   encodeFunctionData(
-    functionFragment: 'setApprovalForAll',
+    functionFragment: "setApprovalForAll",
     values: [string, boolean]
-  ): string
+  ): string;
   encodeFunctionData(
-    functionFragment: 'supportsInterface',
+    functionFragment: "supportsInterface",
     values: [BytesLike]
-  ): string
-  encodeFunctionData(functionFragment: 'symbol', values?: undefined): string
+  ): string;
+  encodeFunctionData(functionFragment: "symbol", values?: undefined): string;
   encodeFunctionData(
-    functionFragment: 'tokenIdsByOwner',
+    functionFragment: "tokenIdsByOwner",
     values: [string]
-  ): string
+  ): string;
   encodeFunctionData(
-    functionFragment: 'tokenURI',
+    functionFragment: "tokenURI",
     values: [BigNumberish]
-  ): string
+  ): string;
   encodeFunctionData(
-    functionFragment: 'tokenURIsAndIDsByOwner',
+    functionFragment: "tokenURIsAndIDsByOwner",
     values: [string]
-  ): string
+  ): string;
   encodeFunctionData(
-    functionFragment: 'transferFrom',
+    functionFragment: "transferFrom",
     values: [string, string, BigNumberish]
-  ): string
+  ): string;
   encodeFunctionData(
-    functionFragment: 'transferOwnership',
+    functionFragment: "transferOwnership",
     values: [string]
-  ): string
+  ): string;
   encodeFunctionData(
-    functionFragment: 'withdrawAll',
+    functionFragment: "withdrawAll",
     values?: undefined
-  ): string
+  ): string;
 
-  decodeFunctionResult(functionFragment: 'MAX_TOKENS', data: BytesLike): Result
-  decodeFunctionResult(functionFragment: 'approve', data: BytesLike): Result
-  decodeFunctionResult(functionFragment: 'balanceOf', data: BytesLike): Result
-  decodeFunctionResult(functionFragment: 'claim', data: BytesLike): Result
-  decodeFunctionResult(functionFragment: 'getApproved', data: BytesLike): Result
+  decodeFunctionResult(functionFragment: "MAX_TOKENS", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "claim", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: 'isApprovedForAll',
+    functionFragment: "getApproved",
     data: BytesLike
-  ): Result
-  decodeFunctionResult(functionFragment: 'mint', data: BytesLike): Result
-  decodeFunctionResult(functionFragment: 'name', data: BytesLike): Result
-  decodeFunctionResult(functionFragment: 'owner', data: BytesLike): Result
-  decodeFunctionResult(functionFragment: 'ownerOf', data: BytesLike): Result
+  ): Result;
   decodeFunctionResult(
-    functionFragment: 'renounceOwnership',
+    functionFragment: "isApprovedForAll",
     data: BytesLike
-  ): Result
+  ): Result;
+  decodeFunctionResult(functionFragment: "mint", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "name", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "owner", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "ownerOf", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: 'safeTransferFrom',
+    functionFragment: "renounceOwnership",
     data: BytesLike
-  ): Result
+  ): Result;
   decodeFunctionResult(
-    functionFragment: 'setApprovalForAll',
+    functionFragment: "safeTransferFrom",
     data: BytesLike
-  ): Result
+  ): Result;
   decodeFunctionResult(
-    functionFragment: 'supportsInterface',
+    functionFragment: "setApprovalForAll",
     data: BytesLike
-  ): Result
-  decodeFunctionResult(functionFragment: 'symbol', data: BytesLike): Result
+  ): Result;
   decodeFunctionResult(
-    functionFragment: 'tokenIdsByOwner',
+    functionFragment: "supportsInterface",
     data: BytesLike
-  ): Result
-  decodeFunctionResult(functionFragment: 'tokenURI', data: BytesLike): Result
+  ): Result;
+  decodeFunctionResult(functionFragment: "symbol", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: 'tokenURIsAndIDsByOwner',
+    functionFragment: "tokenIdsByOwner",
     data: BytesLike
-  ): Result
+  ): Result;
+  decodeFunctionResult(functionFragment: "tokenURI", data: BytesLike): Result;
   decodeFunctionResult(
-    functionFragment: 'transferFrom',
+    functionFragment: "tokenURIsAndIDsByOwner",
     data: BytesLike
-  ): Result
+  ): Result;
   decodeFunctionResult(
-    functionFragment: 'transferOwnership',
+    functionFragment: "transferFrom",
     data: BytesLike
-  ): Result
-  decodeFunctionResult(functionFragment: 'withdrawAll', data: BytesLike): Result
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "transferOwnership",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "withdrawAll",
+    data: BytesLike
+  ): Result;
 
   events: {
-    'Approval(address,address,uint256)': EventFragment
-    'ApprovalForAll(address,address,bool)': EventFragment
-    'Claim(uint256)': EventFragment
-    'Mint(uint256)': EventFragment
-    'OwnershipTransferred(address,address)': EventFragment
-    'Transfer(address,address,uint256)': EventFragment
-  }
+    "Approval(address,address,uint256)": EventFragment;
+    "ApprovalForAll(address,address,bool)": EventFragment;
+    "Claim(uint256)": EventFragment;
+    "Mint(uint256)": EventFragment;
+    "OwnershipTransferred(address,address)": EventFragment;
+    "Transfer(address,address,uint256)": EventFragment;
+  };
 
-  getEvent(nameOrSignatureOrTopic: 'Approval'): EventFragment
-  getEvent(nameOrSignatureOrTopic: 'ApprovalForAll'): EventFragment
-  getEvent(nameOrSignatureOrTopic: 'Claim'): EventFragment
-  getEvent(nameOrSignatureOrTopic: 'Mint'): EventFragment
-  getEvent(nameOrSignatureOrTopic: 'OwnershipTransferred'): EventFragment
-  getEvent(nameOrSignatureOrTopic: 'Transfer'): EventFragment
+  getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "ApprovalForAll"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Claim"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Mint"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
+  getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
 
 export class RandomSoundsNFT extends BaseContract {
-  connect(signerOrProvider: Signer | Provider | string): this
-  attach(addressOrName: string): this
-  deployed(): Promise<this>
+  connect(signerOrProvider: Signer | Provider | string): this;
+  attach(addressOrName: string): this;
+  deployed(): Promise<this>;
 
   listeners<EventArgsArray extends Array<any>, EventArgsObject>(
     eventFilter?: TypedEventFilter<EventArgsArray, EventArgsObject>
-  ): Array<TypedListener<EventArgsArray, EventArgsObject>>
+  ): Array<TypedListener<EventArgsArray, EventArgsObject>>;
   off<EventArgsArray extends Array<any>, EventArgsObject>(
     eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
     listener: TypedListener<EventArgsArray, EventArgsObject>
-  ): this
+  ): this;
   on<EventArgsArray extends Array<any>, EventArgsObject>(
     eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
     listener: TypedListener<EventArgsArray, EventArgsObject>
-  ): this
+  ): this;
   once<EventArgsArray extends Array<any>, EventArgsObject>(
     eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
     listener: TypedListener<EventArgsArray, EventArgsObject>
-  ): this
+  ): this;
   removeListener<EventArgsArray extends Array<any>, EventArgsObject>(
     eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>,
     listener: TypedListener<EventArgsArray, EventArgsObject>
-  ): this
+  ): this;
   removeAllListeners<EventArgsArray extends Array<any>, EventArgsObject>(
     eventFilter: TypedEventFilter<EventArgsArray, EventArgsObject>
-  ): this
+  ): this;
 
-  listeners(eventName?: string): Array<Listener>
-  off(eventName: string, listener: Listener): this
-  on(eventName: string, listener: Listener): this
-  once(eventName: string, listener: Listener): this
-  removeListener(eventName: string, listener: Listener): this
-  removeAllListeners(eventName?: string): this
+  listeners(eventName?: string): Array<Listener>;
+  off(eventName: string, listener: Listener): this;
+  on(eventName: string, listener: Listener): this;
+  once(eventName: string, listener: Listener): this;
+  removeListener(eventName: string, listener: Listener): this;
+  removeAllListeners(eventName?: string): this;
 
   queryFilter<EventArgsArray extends Array<any>, EventArgsObject>(
     event: TypedEventFilter<EventArgsArray, EventArgsObject>,
     fromBlockOrBlockhash?: string | number | undefined,
     toBlock?: string | number | undefined
-  ): Promise<Array<TypedEvent<EventArgsArray & EventArgsObject>>>
+  ): Promise<Array<TypedEvent<EventArgsArray & EventArgsObject>>>;
 
-  interface: RandomSoundsNFTInterface
+  interface: RandomSoundsNFTInterface;
 
   functions: {
-    MAX_TOKENS(overrides?: CallOverrides): Promise<[BigNumber]>
+    MAX_TOKENS(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     approve(
       to: string,
       tokenId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>
+    ): Promise<ContractTransaction>;
 
-    balanceOf(owner: string, overrides?: CallOverrides): Promise<[BigNumber]>
+    balanceOf(owner: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
     claim(
       _tokenId: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>
+    ): Promise<ContractTransaction>;
 
     getApproved(
       tokenId: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<[string]>
+    ): Promise<[string]>;
 
     isApprovedForAll(
       owner: string,
       operator: string,
       overrides?: CallOverrides
-    ): Promise<[boolean]>
+    ): Promise<[boolean]>;
 
     mint(
       tokenURI_: string,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>
+    ): Promise<ContractTransaction>;
 
-    name(overrides?: CallOverrides): Promise<[string]>
+    name(overrides?: CallOverrides): Promise<[string]>;
 
-    owner(overrides?: CallOverrides): Promise<[string]>
+    owner(overrides?: CallOverrides): Promise<[string]>;
 
-    ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<[string]>
+    ownerOf(
+      tokenId: BigNumberish,
+      overrides?: CallOverrides
+    ): Promise<[string]>;
 
     renounceOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>
+    ): Promise<ContractTransaction>;
 
-    'safeTransferFrom(address,address,uint256)'(
+    "safeTransferFrom(address,address,uint256)"(
       from: string,
       to: string,
       tokenId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>
+    ): Promise<ContractTransaction>;
 
-    'safeTransferFrom(address,address,uint256,bytes)'(
+    "safeTransferFrom(address,address,uint256,bytes)"(
       from: string,
       to: string,
       tokenId: BigNumberish,
       _data: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>
+    ): Promise<ContractTransaction>;
 
     setApprovalForAll(
       operator: string,
       approved: boolean,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>
+    ): Promise<ContractTransaction>;
 
     supportsInterface(
       interfaceId: BytesLike,
       overrides?: CallOverrides
-    ): Promise<[boolean]>
+    ): Promise<[boolean]>;
 
-    symbol(overrides?: CallOverrides): Promise<[string]>
+    symbol(overrides?: CallOverrides): Promise<[string]>;
 
     tokenIdsByOwner(
       _owner: string,
       overrides?: CallOverrides
-    ): Promise<[BigNumber[]]>
+    ): Promise<[BigNumber[]]>;
 
     tokenURI(
       tokenId: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<[string]>
+    ): Promise<[string]>;
 
     tokenURIsAndIDsByOwner(
       _owner: string,
       overrides?: CallOverrides
-    ): Promise<[([BigNumber, string] & { id: BigNumber; uri: string })[]]>
+    ): Promise<[([BigNumber, string] & { id: BigNumber; uri: string })[]]>;
 
     transferFrom(
       from: string,
       to: string,
       tokenId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>
+    ): Promise<ContractTransaction>;
 
     transferOwnership(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>
+    ): Promise<ContractTransaction>;
 
     withdrawAll(
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<ContractTransaction>
-  }
+    ): Promise<ContractTransaction>;
+  };
 
-  MAX_TOKENS(overrides?: CallOverrides): Promise<BigNumber>
+  MAX_TOKENS(overrides?: CallOverrides): Promise<BigNumber>;
 
   approve(
     to: string,
     tokenId: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>
+  ): Promise<ContractTransaction>;
 
-  balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>
+  balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
 
   claim(
     _tokenId: BigNumberish,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>
+  ): Promise<ContractTransaction>;
 
-  getApproved(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>
+  getApproved(
+    tokenId: BigNumberish,
+    overrides?: CallOverrides
+  ): Promise<string>;
 
   isApprovedForAll(
     owner: string,
     operator: string,
     overrides?: CallOverrides
-  ): Promise<boolean>
+  ): Promise<boolean>;
 
   mint(
     tokenURI_: string,
     overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>
+  ): Promise<ContractTransaction>;
 
-  name(overrides?: CallOverrides): Promise<string>
+  name(overrides?: CallOverrides): Promise<string>;
 
-  owner(overrides?: CallOverrides): Promise<string>
+  owner(overrides?: CallOverrides): Promise<string>;
 
-  ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>
+  ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
   renounceOwnership(
     overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>
+  ): Promise<ContractTransaction>;
 
-  'safeTransferFrom(address,address,uint256)'(
+  "safeTransferFrom(address,address,uint256)"(
     from: string,
     to: string,
     tokenId: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>
+  ): Promise<ContractTransaction>;
 
-  'safeTransferFrom(address,address,uint256,bytes)'(
+  "safeTransferFrom(address,address,uint256,bytes)"(
     from: string,
     to: string,
     tokenId: BigNumberish,
     _data: BytesLike,
     overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>
+  ): Promise<ContractTransaction>;
 
   setApprovalForAll(
     operator: string,
     approved: boolean,
     overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>
+  ): Promise<ContractTransaction>;
 
   supportsInterface(
     interfaceId: BytesLike,
     overrides?: CallOverrides
-  ): Promise<boolean>
+  ): Promise<boolean>;
 
-  symbol(overrides?: CallOverrides): Promise<string>
+  symbol(overrides?: CallOverrides): Promise<string>;
 
   tokenIdsByOwner(
     _owner: string,
     overrides?: CallOverrides
-  ): Promise<BigNumber[]>
+  ): Promise<BigNumber[]>;
 
-  tokenURI(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>
+  tokenURI(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
   tokenURIsAndIDsByOwner(
     _owner: string,
     overrides?: CallOverrides
-  ): Promise<([BigNumber, string] & { id: BigNumber; uri: string })[]>
+  ): Promise<([BigNumber, string] & { id: BigNumber; uri: string })[]>;
 
   transferFrom(
     from: string,
     to: string,
     tokenId: BigNumberish,
     overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>
+  ): Promise<ContractTransaction>;
 
   transferOwnership(
     newOwner: string,
     overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>
+  ): Promise<ContractTransaction>;
 
   withdrawAll(
     overrides?: Overrides & { from?: string | Promise<string> }
-  ): Promise<ContractTransaction>
+  ): Promise<ContractTransaction>;
 
   callStatic: {
-    MAX_TOKENS(overrides?: CallOverrides): Promise<BigNumber>
+    MAX_TOKENS(overrides?: CallOverrides): Promise<BigNumber>;
 
     approve(
       to: string,
       tokenId: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<void>
+    ): Promise<void>;
 
-    balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>
+    balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    claim(_tokenId: BigNumberish, overrides?: CallOverrides): Promise<void>
+    claim(_tokenId: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
     getApproved(
       tokenId: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<string>
+    ): Promise<string>;
 
     isApprovedForAll(
       owner: string,
       operator: string,
       overrides?: CallOverrides
-    ): Promise<boolean>
+    ): Promise<boolean>;
 
-    mint(tokenURI_: string, overrides?: CallOverrides): Promise<BigNumber>
+    mint(tokenURI_: string, overrides?: CallOverrides): Promise<BigNumber>;
 
-    name(overrides?: CallOverrides): Promise<string>
+    name(overrides?: CallOverrides): Promise<string>;
 
-    owner(overrides?: CallOverrides): Promise<string>
+    owner(overrides?: CallOverrides): Promise<string>;
 
-    ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>
+    ownerOf(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
-    renounceOwnership(overrides?: CallOverrides): Promise<void>
+    renounceOwnership(overrides?: CallOverrides): Promise<void>;
 
-    'safeTransferFrom(address,address,uint256)'(
+    "safeTransferFrom(address,address,uint256)"(
       from: string,
       to: string,
       tokenId: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<void>
+    ): Promise<void>;
 
-    'safeTransferFrom(address,address,uint256,bytes)'(
+    "safeTransferFrom(address,address,uint256,bytes)"(
       from: string,
       to: string,
       tokenId: BigNumberish,
       _data: BytesLike,
       overrides?: CallOverrides
-    ): Promise<void>
+    ): Promise<void>;
 
     setApprovalForAll(
       operator: string,
       approved: boolean,
       overrides?: CallOverrides
-    ): Promise<void>
+    ): Promise<void>;
 
     supportsInterface(
       interfaceId: BytesLike,
       overrides?: CallOverrides
-    ): Promise<boolean>
+    ): Promise<boolean>;
 
-    symbol(overrides?: CallOverrides): Promise<string>
+    symbol(overrides?: CallOverrides): Promise<string>;
 
     tokenIdsByOwner(
       _owner: string,
       overrides?: CallOverrides
-    ): Promise<BigNumber[]>
+    ): Promise<BigNumber[]>;
 
-    tokenURI(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>
+    tokenURI(tokenId: BigNumberish, overrides?: CallOverrides): Promise<string>;
 
     tokenURIsAndIDsByOwner(
       _owner: string,
       overrides?: CallOverrides
-    ): Promise<([BigNumber, string] & { id: BigNumber; uri: string })[]>
+    ): Promise<([BigNumber, string] & { id: BigNumber; uri: string })[]>;
 
     transferFrom(
       from: string,
       to: string,
       tokenId: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<void>
+    ): Promise<void>;
 
     transferOwnership(
       newOwner: string,
       overrides?: CallOverrides
-    ): Promise<void>
+    ): Promise<void>;
 
-    withdrawAll(overrides?: CallOverrides): Promise<void>
-  }
+    withdrawAll(overrides?: CallOverrides): Promise<void>;
+  };
 
   filters: {
     Approval(
@@ -511,7 +526,7 @@ export class RandomSoundsNFT extends BaseContract {
     ): TypedEventFilter<
       [string, string, BigNumber],
       { owner: string; approved: string; tokenId: BigNumber }
-    >
+    >;
 
     ApprovalForAll(
       owner?: string | null,
@@ -520,11 +535,11 @@ export class RandomSoundsNFT extends BaseContract {
     ): TypedEventFilter<
       [string, string, boolean],
       { owner: string; operator: string; approved: boolean }
-    >
+    >;
 
-    Claim(id?: null): TypedEventFilter<[BigNumber], { id: BigNumber }>
+    Claim(id?: null): TypedEventFilter<[BigNumber], { id: BigNumber }>;
 
-    Mint(id?: null): TypedEventFilter<[BigNumber], { id: BigNumber }>
+    Mint(id?: null): TypedEventFilter<[BigNumber], { id: BigNumber }>;
 
     OwnershipTransferred(
       previousOwner?: string | null,
@@ -532,7 +547,7 @@ export class RandomSoundsNFT extends BaseContract {
     ): TypedEventFilter<
       [string, string],
       { previousOwner: string; newOwner: string }
-    >
+    >;
 
     Transfer(
       from?: string | null,
@@ -541,219 +556,219 @@ export class RandomSoundsNFT extends BaseContract {
     ): TypedEventFilter<
       [string, string, BigNumber],
       { from: string; to: string; tokenId: BigNumber }
-    >
-  }
+    >;
+  };
 
   estimateGas: {
-    MAX_TOKENS(overrides?: CallOverrides): Promise<BigNumber>
+    MAX_TOKENS(overrides?: CallOverrides): Promise<BigNumber>;
 
     approve(
       to: string,
       tokenId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>
+    ): Promise<BigNumber>;
 
-    balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>
+    balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
 
     claim(
       _tokenId: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>
+    ): Promise<BigNumber>;
 
     getApproved(
       tokenId: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<BigNumber>
+    ): Promise<BigNumber>;
 
     isApprovedForAll(
       owner: string,
       operator: string,
       overrides?: CallOverrides
-    ): Promise<BigNumber>
+    ): Promise<BigNumber>;
 
     mint(
       tokenURI_: string,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>
+    ): Promise<BigNumber>;
 
-    name(overrides?: CallOverrides): Promise<BigNumber>
+    name(overrides?: CallOverrides): Promise<BigNumber>;
 
-    owner(overrides?: CallOverrides): Promise<BigNumber>
+    owner(overrides?: CallOverrides): Promise<BigNumber>;
 
     ownerOf(
       tokenId: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<BigNumber>
+    ): Promise<BigNumber>;
 
     renounceOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>
+    ): Promise<BigNumber>;
 
-    'safeTransferFrom(address,address,uint256)'(
+    "safeTransferFrom(address,address,uint256)"(
       from: string,
       to: string,
       tokenId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>
+    ): Promise<BigNumber>;
 
-    'safeTransferFrom(address,address,uint256,bytes)'(
+    "safeTransferFrom(address,address,uint256,bytes)"(
       from: string,
       to: string,
       tokenId: BigNumberish,
       _data: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>
+    ): Promise<BigNumber>;
 
     setApprovalForAll(
       operator: string,
       approved: boolean,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>
+    ): Promise<BigNumber>;
 
     supportsInterface(
       interfaceId: BytesLike,
       overrides?: CallOverrides
-    ): Promise<BigNumber>
+    ): Promise<BigNumber>;
 
-    symbol(overrides?: CallOverrides): Promise<BigNumber>
+    symbol(overrides?: CallOverrides): Promise<BigNumber>;
 
     tokenIdsByOwner(
       _owner: string,
       overrides?: CallOverrides
-    ): Promise<BigNumber>
+    ): Promise<BigNumber>;
 
     tokenURI(
       tokenId: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<BigNumber>
+    ): Promise<BigNumber>;
 
     tokenURIsAndIDsByOwner(
       _owner: string,
       overrides?: CallOverrides
-    ): Promise<BigNumber>
+    ): Promise<BigNumber>;
 
     transferFrom(
       from: string,
       to: string,
       tokenId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>
+    ): Promise<BigNumber>;
 
     transferOwnership(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>
+    ): Promise<BigNumber>;
 
     withdrawAll(
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<BigNumber>
-  }
+    ): Promise<BigNumber>;
+  };
 
   populateTransaction: {
-    MAX_TOKENS(overrides?: CallOverrides): Promise<PopulatedTransaction>
+    MAX_TOKENS(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     approve(
       to: string,
       tokenId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>
+    ): Promise<PopulatedTransaction>;
 
     balanceOf(
       owner: string,
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>
+    ): Promise<PopulatedTransaction>;
 
     claim(
       _tokenId: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>
+    ): Promise<PopulatedTransaction>;
 
     getApproved(
       tokenId: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>
+    ): Promise<PopulatedTransaction>;
 
     isApprovedForAll(
       owner: string,
       operator: string,
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>
+    ): Promise<PopulatedTransaction>;
 
     mint(
       tokenURI_: string,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>
+    ): Promise<PopulatedTransaction>;
 
-    name(overrides?: CallOverrides): Promise<PopulatedTransaction>
+    name(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
-    owner(overrides?: CallOverrides): Promise<PopulatedTransaction>
+    owner(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     ownerOf(
       tokenId: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>
+    ): Promise<PopulatedTransaction>;
 
     renounceOwnership(
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>
+    ): Promise<PopulatedTransaction>;
 
-    'safeTransferFrom(address,address,uint256)'(
+    "safeTransferFrom(address,address,uint256)"(
       from: string,
       to: string,
       tokenId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>
+    ): Promise<PopulatedTransaction>;
 
-    'safeTransferFrom(address,address,uint256,bytes)'(
+    "safeTransferFrom(address,address,uint256,bytes)"(
       from: string,
       to: string,
       tokenId: BigNumberish,
       _data: BytesLike,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>
+    ): Promise<PopulatedTransaction>;
 
     setApprovalForAll(
       operator: string,
       approved: boolean,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>
+    ): Promise<PopulatedTransaction>;
 
     supportsInterface(
       interfaceId: BytesLike,
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>
+    ): Promise<PopulatedTransaction>;
 
-    symbol(overrides?: CallOverrides): Promise<PopulatedTransaction>
+    symbol(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     tokenIdsByOwner(
       _owner: string,
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>
+    ): Promise<PopulatedTransaction>;
 
     tokenURI(
       tokenId: BigNumberish,
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>
+    ): Promise<PopulatedTransaction>;
 
     tokenURIsAndIDsByOwner(
       _owner: string,
       overrides?: CallOverrides
-    ): Promise<PopulatedTransaction>
+    ): Promise<PopulatedTransaction>;
 
     transferFrom(
       from: string,
       to: string,
       tokenId: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>
+    ): Promise<PopulatedTransaction>;
 
     transferOwnership(
       newOwner: string,
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>
+    ): Promise<PopulatedTransaction>;
 
     withdrawAll(
       overrides?: Overrides & { from?: string | Promise<string> }
-    ): Promise<PopulatedTransaction>
-  }
+    ): Promise<PopulatedTransaction>;
+  };
 }
