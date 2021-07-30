@@ -19,7 +19,7 @@ contract RandomSoundsNFT is ERC721, Ownable, ERC721URIStorage {
 
     uint256 public constant MAX_TOKENS = 50;
 
-    uint256 private constant PRICE = 50000000000000000;
+    uint256 private constant PRICE = 100000000000000000000; // 100 MATIC
 
     using SafeMath for uint256;
 
@@ -71,7 +71,7 @@ contract RandomSoundsNFT is ERC721, Ownable, ERC721URIStorage {
 
         address _owner = ownerOf(_tokenId);
 
-        payable(_owner).transfer(msg.value); // pay 0.05ETH to owner
+        payable(_owner).transfer(msg.value); // pay 110 MATIC to owner
 
         setApprovalForAll(_owner, true); // approve buying NFTs
         _transfer(_owner, msg.sender, _tokenId); // transfer NFT
