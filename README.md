@@ -4,8 +4,8 @@ Solidity contract for random sounds NFT. Includes the contract itself and TypeSc
 
 ## Addresses
 
-- Mumbai testnet: `0x483df038bfAde9d2bDe6f267927EB392b5abAcee`
-- Polygon mainnet: coming soon
+- Ropsten testnet: `0x706Ceab8aD7696C75554446Cad371aa337405B09`
+- Ethereum mainnet: coming soon
 
 ## Install
 
