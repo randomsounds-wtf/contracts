@@ -36,11 +36,16 @@ const config: HardhatUserConfig = {
       gas: 8000000,
       gasPrice: 1
     },
-    mumbai: {
+    ropsten: {
+      url: 'https://ropsten.infura.io/v3/08791951999a4e71b9ba5ae174126de5',
+      chainId: 3,
+      accounts: [PRIVATE_KEY]
+    },
+    /* mumbai: {
       url: 'https://rpc-mumbai.maticvigil.com',
       accounts: [PRIVATE_KEY],
       chainId: 80001
-    },
+    }, */
     localhost: {}
   }
 }

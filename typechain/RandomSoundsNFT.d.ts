@@ -27,6 +27,7 @@ interface RandomSoundsNFTInterface extends ethers.utils.Interface {
     "balanceOf(address)": FunctionFragment;
     "claim(uint256)": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
+    "getPrice()": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "mint(string)": FunctionFragment;
     "name()": FunctionFragment;
@@ -59,6 +60,7 @@ interface RandomSoundsNFTInterface extends ethers.utils.Interface {
     functionFragment: "getApproved",
     values: [BigNumberish]
   ): string;
+  encodeFunctionData(functionFragment: "getPrice", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "isApprovedForAll",
     values: [string, string]
@@ -120,6 +122,7 @@ interface RandomSoundsNFTInterface extends ethers.utils.Interface {
     functionFragment: "getApproved",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "getPrice", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "isApprovedForAll",
     data: BytesLike
@@ -248,6 +251,8 @@ export class RandomSoundsNFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<[string]>;
 
+    getPrice(overrides?: CallOverrides): Promise<[BigNumber]>;
+
     isApprovedForAll(
       owner: string,
       operator: string,
@@ -352,6 +357,8 @@ export class RandomSoundsNFT extends BaseContract {
     overrides?: CallOverrides
   ): Promise<string>;
 
+  getPrice(overrides?: CallOverrides): Promise<BigNumber>;
+
   isApprovedForAll(
     owner: string,
     operator: string,
@@ -446,6 +453,8 @@ export class RandomSoundsNFT extends BaseContract {
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
+
+    getPrice(overrides?: CallOverrides): Promise<BigNumber>;
 
     isApprovedForAll(
       owner: string,
@@ -580,6 +589,8 @@ export class RandomSoundsNFT extends BaseContract {
       overrides?: CallOverrides
     ): Promise<BigNumber>;
 
+    getPrice(overrides?: CallOverrides): Promise<BigNumber>;
+
     isApprovedForAll(
       owner: string,
       operator: string,
@@ -687,6 +698,8 @@ export class RandomSoundsNFT extends BaseContract {
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
+
+    getPrice(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     isApprovedForAll(
       owner: string,

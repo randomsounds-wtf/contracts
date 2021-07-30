@@ -6,7 +6,6 @@ import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 import "@openzeppelin/contracts/utils/math/SafeMath.sol";
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
-import "hardhat/console.sol";
 
 contract RandomSoundsNFT is ERC721, Ownable, ERC721URIStorage {
     struct URIwithID {
@@ -19,7 +18,7 @@ contract RandomSoundsNFT is ERC721, Ownable, ERC721URIStorage {
 
     uint256 public constant MAX_TOKENS = 50;
 
-    uint256 private constant PRICE = 100000000000000000000; // 100 MATIC
+    uint256 private constant PRICE = 0.05 ether;
 
     using SafeMath for uint256;
 
@@ -130,5 +129,10 @@ contract RandomSoundsNFT is ERC721, Ownable, ERC721URIStorage {
     function withdrawAll() public onlyOwner {
         uint256 balance = address(this).balance;
         payable(msg.sender).transfer(balance);
+    }
+
+    // get current price
+    function getPrice() public pure returns (uint256) {
+        return PRICE;
     }
 }
