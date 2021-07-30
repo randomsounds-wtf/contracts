@@ -20,39 +20,29 @@ const config: HardhatUserConfig = {
     settings: {
       optimizer: {
         enabled: true,
-        runs: 200,
-      },
-    },
+        runs: 200
+      }
+    }
   },
   paths: {
     tests: './tests',
 
     cache: './cache',
-    artifacts: './artifacts',
+    artifacts: './artifacts'
   },
   networks: {
     hardhat: {
       chainId: 1337, // TO WORK WITH METAMASK
       gas: 8000000,
-      gasPrice: 1,
+      gasPrice: 1
     },
-    matic: {
+    mumbai: {
       url: 'https://rpc-mumbai.maticvigil.com',
       accounts: [PRIVATE_KEY],
-      chainId: 80001,
+      chainId: 80001
     },
-    localhost: {},
-  },
+    localhost: {}
+  }
 }
 
 export default config
-
-task(
-  'blockNumber',
-  'Prints the current block number',
-  async (_, { ethers }) => {
-    await ethers.provider.getBlockNumber().then((blockNumber) => {
-      console.log('Current block number: ' + blockNumber)
-    })
-  }
-)

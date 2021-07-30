@@ -21,8 +21,6 @@ contract RandomSoundsNFT is ERC721, Ownable, ERC721URIStorage {
 
     uint256 private constant PRICE = 50000000000000000;
 
-    uint256 private constant MAX_GAS = 150000000000; // 150 gwei
-
     using SafeMath for uint256;
 
     using Counters for Counters.Counter;

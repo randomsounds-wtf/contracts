@@ -10,17 +10,12 @@ async function main() {
 
   console.log('Deploying contracts with the account:', deployer.address)
 
-  const NFTContractFactory = (await hre.ethers.getContractFactory(
-    'RandomSoundsNFT'
-  )) as RandomSoundsNFT__factory
+  const NFTContractFactory = (await hre.ethers.getContractFactory('RandomSoundsNFT')) as RandomSoundsNFT__factory
   const NFTContract = (await NFTContractFactory.deploy()) as RandomSoundsNFT
 
   await NFTContract.deployed()
 
-  console.log(
-    'Minting NFTs to the contract with the deployer address : ',
-    deployer.address
-  )
+  console.log('Minting NFTs to the contract with the deployer address : ', deployer.address)
 
   const isLocalTestnet = (await deployer.getChainId()) === 1337
 
