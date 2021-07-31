@@ -6,7 +6,7 @@
  
 </div>
 
-Solidity contract for <a href="https://randomsounds.wtf">RAND0M S0UNDS NFT</a>. Includes the contract itself, ABIs and TypeScript definitons.
+Solidity contract for <a href="https://randomsounds.wtf"><code>RAND0M S0UNDS NFT</code></a>. Includes the contract itself, ABIs and TypeScript definitons.
 
 ## Addresses
 
