@@ -8,10 +8,7 @@ import { RandomSoundsNFT } from '../typechain/RandomSoundsNFT'
 describe('NFT', () => {
   let NFTContractFactory
   let NFTContract: RandomSoundsNFT
-  let owner: SignerWithAddress,
-    addr1: SignerWithAddress,
-    addr2: SignerWithAddress,
-    addrs
+  let owner: SignerWithAddress, addr1: SignerWithAddress, addr2: SignerWithAddress, addrs
 
   beforeEach(async () => {
     ;[owner, addr1, addr2, addrs] = await ethers.getSigners()
@@ -43,9 +40,7 @@ describe('NFT', () => {
         for (let i = 1; i <= 50; i++) mockIDs.push(i)
 
         assert.deepStrictEqual(
-          (await NFTContract.tokenIdsByOwner(owner.address)).map((x) =>
-            x.toNumber()
-          ),
+          (await NFTContract.tokenIdsByOwner(owner.address)).map((x) => x.toNumber()),
           mockIDs
         )
       })
@@ -62,16 +57,12 @@ describe('NFT', () => {
         await NFTContract.transferFrom(owner.address, addr1.address, 12)
 
         assert.deepStrictEqual(
-          (await NFTContract.tokenIdsByOwner(owner.address)).map((x) =>
-            x.toNumber()
-          ),
+          (await NFTContract.tokenIdsByOwner(owner.address)).map((x) => x.toNumber()),
           mockIDs
         )
 
         assert.deepStrictEqual(
-          (await NFTContract.tokenIdsByOwner(addr1.address)).map((x) =>
-            x.toNumber()
-          ),
+          (await NFTContract.tokenIdsByOwner(addr1.address)).map((x) => x.toNumber()),
           [2, 8, 12]
         )
       })
@@ -80,16 +71,13 @@ describe('NFT', () => {
       it('should return an array of structs with IDs and URIs', async () => {
         const mockIDs = []
 
-        for (let i = 1; i <= 50; i++)
-          mockIDs.push({ id: i, uri: nfts[i - 1].cid })
+        for (let i = 1; i <= 50; i++) mockIDs.push({ id: i, uri: nfts[i - 1].cid })
 
         assert.deepStrictEqual(
-          (await NFTContract.tokenURIsAndIDsByOwner(owner.address)).map(
-            (x) => ({
-              uri: x.uri,
-              id: x.id.toNumber(),
-            })
-          ),
+          (await NFTContract.tokenURIsAndIDsByOwner(owner.address)).map((x) => ({
+            uri: x.uri,
+            id: x.id.toNumber()
+          })),
           mockIDs
         )
       })
@@ -97,8 +85,7 @@ describe('NFT', () => {
         const mockIDs = []
 
         for (let i = 1; i <= 50; i++) {
-          if (i !== 2 && i !== 8 && i !== 12)
-            mockIDs.push({ id: i, uri: nfts[i - 1].cid })
+          if (i !== 2 && i !== 8 && i !== 12) mockIDs.push({ id: i, uri: nfts[i - 1].cid })
         }
 
         // Transfer away some NFTs
@@ -107,12 +94,10 @@ describe('NFT', () => {
         await NFTContract.transferFrom(owner.address, addr1.address, 12)
 
         assert.deepStrictEqual(
-          (await NFTContract.tokenURIsAndIDsByOwner(owner.address)).map(
-            (x) => ({
-              uri: x.uri,
-              id: x.id.toNumber(),
-            })
-          ),
+          (await NFTContract.tokenURIsAndIDsByOwner(owner.address)).map((x) => ({
+            uri: x.uri,
+            id: x.id.toNumber()
+          })),
           mockIDs
         )
       })

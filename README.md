@@ -3,15 +3,15 @@
 # @randomsounds/contracts
 
 [![Version][v-badge-url]][npm-url] [![Downloads][dl-badge-url]][npm-url] [![GitHub Workflow Status][gh-actions-img]][github-actions]
- 
+
 </div>
 
 Solidity contract for <a href="https://randomsounds.wtf"><code>RAND0M S0UNDS NFT</code></a>. Includes the contract itself, ABIs and TypeScript definitons.
 
 ## Addresses
 
-- Ropsten testnet: `0x706Ceab8aD7696C75554446Cad371aa337405B09`
-- Ethereum mainnet: coming soon
+- Deployer address: `0x0A9f12d325b905907C43566b4740F2dFE10C3C4B`
+- Contract address: `0xF66770253dfC078d6a3844e0c4738d2ff5006E5D`
 
 ## Install
 

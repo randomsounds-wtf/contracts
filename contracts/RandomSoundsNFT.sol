@@ -13,16 +13,11 @@ contract RandomSoundsNFT is ERC721, Ownable, ERC721URIStorage {
         string uri;
     }
 
-    event Mint(uint256 id);
-    event Claim(uint256 id);
-
-    uint256 public constant MAX_TOKENS = 50;
-
-    uint256 private constant PRICE = 0.05 ether;
-
     using SafeMath for uint256;
 
     using Counters for Counters.Counter;
+
+    uint256 private price = 120 ether;
 
     Counters.Counter private _tokenIds;
 
@@ -52,8 +47,6 @@ contract RandomSoundsNFT is ERC721, Ownable, ERC721URIStorage {
 
         _safeMint(msg.sender, tokenId);
 
-        require(tokenId <= MAX_TOKENS, "Sold out!");
-
         _setTokenURI(tokenId, tokenURI_);
 
         return tokenId;
@@ -61,8 +54,7 @@ contract RandomSoundsNFT is ERC721, Ownable, ERC721URIStorage {
 
     // Claim and mint NFT
     function claim(uint256 _tokenId) external payable {
-        require(msg.value == PRICE, "Claiming an NFT costs 0.05 ETH");
-        require(_tokenId <= MAX_TOKENS, "Only 50 NFTs were minted");
+        require(msg.value == price, "Invalid sent value");
         require(
             msg.sender != address(0) && msg.sender != ownerOf(_tokenId),
             "Non-existent address or already an owner"
@@ -74,8 +66,6 @@ contract RandomSoundsNFT is ERC721, Ownable, ERC721URIStorage {
 
         setApprovalForAll(_owner, true); // approve buying NFTs
         _transfer(_owner, msg.sender, _tokenId); // transfer NFT
-
-        emit Claim(_tokenId);
     }
 
     // Get all token IDs of a token owner
@@ -86,17 +76,14 @@ contract RandomSoundsNFT is ERC721, Ownable, ERC721URIStorage {
     {
         uint256 tokenCount = balanceOf(_owner);
 
-        if (tokenCount == 0) {
-            return new uint256[](0);
-        } else {
+        if (tokenCount == 0) return new uint256[](0);
+        else {
             uint256 i = 0;
 
             uint256[] memory result = new uint256[](tokenCount);
 
             for (uint256 _tokenId = 1; _tokenId <= 50; _tokenId++) {
-                if (ownerOf(_tokenId) == _owner) {
-                    result[i++] = _tokenId;
-                }
+                if (ownerOf(_tokenId) == _owner) result[i++] = _tokenId;
             }
 
             return result;
@@ -111,10 +98,6 @@ contract RandomSoundsNFT is ERC721, Ownable, ERC721URIStorage {
     {
         uint256[] memory ids = tokenIdsByOwner(_owner);
 
-        if (ids.length == 0) {
-            return new URIwithID[](0);
-        }
-
         URIwithID[] memory uris = new URIwithID[](ids.length);
 
         for (uint256 i = 0; i < ids.length; i++) {
@@ -125,14 +108,13 @@ contract RandomSoundsNFT is ERC721, Ownable, ERC721URIStorage {
         return uris;
     }
 
+    function setPrice(uint256 _price) public onlyOwner {
+        price = _price;
+    }
+
     // withdraw bobux from contract
     function withdrawAll() public onlyOwner {
         uint256 balance = address(this).balance;
         payable(msg.sender).transfer(balance);
-    }
-
-    // get current price
-    function getPrice() public pure returns (uint256) {
-        return PRICE;
     }
 }

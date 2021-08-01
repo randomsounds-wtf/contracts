@@ -22,12 +22,10 @@ import { TypedEventFilter, TypedEvent, TypedListener } from "./commons";
 
 interface RandomSoundsNFTInterface extends ethers.utils.Interface {
   functions: {
-    "MAX_TOKENS()": FunctionFragment;
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
     "claim(uint256)": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
-    "getPrice()": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
     "mint(string)": FunctionFragment;
     "name()": FunctionFragment;
@@ -36,6 +34,7 @@ interface RandomSoundsNFTInterface extends ethers.utils.Interface {
     "renounceOwnership()": FunctionFragment;
     "safeTransferFrom(address,address,uint256)": FunctionFragment;
     "setApprovalForAll(address,bool)": FunctionFragment;
+    "setPrice(uint256)": FunctionFragment;
     "supportsInterface(bytes4)": FunctionFragment;
     "symbol()": FunctionFragment;
     "tokenIdsByOwner(address)": FunctionFragment;
@@ -47,10 +46,6 @@ interface RandomSoundsNFTInterface extends ethers.utils.Interface {
   };
 
   encodeFunctionData(
-    functionFragment: "MAX_TOKENS",
-    values?: undefined
-  ): string;
-  encodeFunctionData(
     functionFragment: "approve",
     values: [string, BigNumberish]
   ): string;
@@ -60,7 +55,6 @@ interface RandomSoundsNFTInterface extends ethers.utils.Interface {
     functionFragment: "getApproved",
     values: [BigNumberish]
   ): string;
-  encodeFunctionData(functionFragment: "getPrice", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "isApprovedForAll",
     values: [string, string]
@@ -83,6 +77,10 @@ interface RandomSoundsNFTInterface extends ethers.utils.Interface {
   encodeFunctionData(
     functionFragment: "setApprovalForAll",
     values: [string, boolean]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "setPrice",
+    values: [BigNumberish]
   ): string;
   encodeFunctionData(
     functionFragment: "supportsInterface",
@@ -114,7 +112,6 @@ interface RandomSoundsNFTInterface extends ethers.utils.Interface {
     values?: undefined
   ): string;
 
-  decodeFunctionResult(functionFragment: "MAX_TOKENS", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "claim", data: BytesLike): Result;
@@ -122,7 +119,6 @@ interface RandomSoundsNFTInterface extends ethers.utils.Interface {
     functionFragment: "getApproved",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "getPrice", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "isApprovedForAll",
     data: BytesLike
@@ -143,6 +139,7 @@ interface RandomSoundsNFTInterface extends ethers.utils.Interface {
     functionFragment: "setApprovalForAll",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "setPrice", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "supportsInterface",
     data: BytesLike
@@ -173,16 +170,12 @@ interface RandomSoundsNFTInterface extends ethers.utils.Interface {
   events: {
     "Approval(address,address,uint256)": EventFragment;
     "ApprovalForAll(address,address,bool)": EventFragment;
-    "Claim(uint256)": EventFragment;
-    "Mint(uint256)": EventFragment;
     "OwnershipTransferred(address,address)": EventFragment;
     "Transfer(address,address,uint256)": EventFragment;
   };
 
   getEvent(nameOrSignatureOrTopic: "Approval"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "ApprovalForAll"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Claim"): EventFragment;
-  getEvent(nameOrSignatureOrTopic: "Mint"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "OwnershipTransferred"): EventFragment;
   getEvent(nameOrSignatureOrTopic: "Transfer"): EventFragment;
 }
@@ -231,8 +224,6 @@ export class RandomSoundsNFT extends BaseContract {
   interface: RandomSoundsNFTInterface;
 
   functions: {
-    MAX_TOKENS(overrides?: CallOverrides): Promise<[BigNumber]>;
-
     approve(
       to: string,
       tokenId: BigNumberish,
@@ -250,8 +241,6 @@ export class RandomSoundsNFT extends BaseContract {
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<[string]>;
-
-    getPrice(overrides?: CallOverrides): Promise<[BigNumber]>;
 
     isApprovedForAll(
       owner: string,
@@ -298,6 +287,11 @@ export class RandomSoundsNFT extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<ContractTransaction>;
 
+    setPrice(
+      _price: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<ContractTransaction>;
+
     supportsInterface(
       interfaceId: BytesLike,
       overrides?: CallOverrides
@@ -337,8 +331,6 @@ export class RandomSoundsNFT extends BaseContract {
     ): Promise<ContractTransaction>;
   };
 
-  MAX_TOKENS(overrides?: CallOverrides): Promise<BigNumber>;
-
   approve(
     to: string,
     tokenId: BigNumberish,
@@ -356,8 +348,6 @@ export class RandomSoundsNFT extends BaseContract {
     tokenId: BigNumberish,
     overrides?: CallOverrides
   ): Promise<string>;
-
-  getPrice(overrides?: CallOverrides): Promise<BigNumber>;
 
   isApprovedForAll(
     owner: string,
@@ -401,6 +391,11 @@ export class RandomSoundsNFT extends BaseContract {
     overrides?: Overrides & { from?: string | Promise<string> }
   ): Promise<ContractTransaction>;
 
+  setPrice(
+    _price: BigNumberish,
+    overrides?: Overrides & { from?: string | Promise<string> }
+  ): Promise<ContractTransaction>;
+
   supportsInterface(
     interfaceId: BytesLike,
     overrides?: CallOverrides
@@ -437,8 +432,6 @@ export class RandomSoundsNFT extends BaseContract {
   ): Promise<ContractTransaction>;
 
   callStatic: {
-    MAX_TOKENS(overrides?: CallOverrides): Promise<BigNumber>;
-
     approve(
       to: string,
       tokenId: BigNumberish,
@@ -453,8 +446,6 @@ export class RandomSoundsNFT extends BaseContract {
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<string>;
-
-    getPrice(overrides?: CallOverrides): Promise<BigNumber>;
 
     isApprovedForAll(
       owner: string,
@@ -492,6 +483,8 @@ export class RandomSoundsNFT extends BaseContract {
       approved: boolean,
       overrides?: CallOverrides
     ): Promise<void>;
+
+    setPrice(_price: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
     supportsInterface(
       interfaceId: BytesLike,
@@ -546,10 +539,6 @@ export class RandomSoundsNFT extends BaseContract {
       { owner: string; operator: string; approved: boolean }
     >;
 
-    Claim(id?: null): TypedEventFilter<[BigNumber], { id: BigNumber }>;
-
-    Mint(id?: null): TypedEventFilter<[BigNumber], { id: BigNumber }>;
-
     OwnershipTransferred(
       previousOwner?: string | null,
       newOwner?: string | null
@@ -569,8 +558,6 @@ export class RandomSoundsNFT extends BaseContract {
   };
 
   estimateGas: {
-    MAX_TOKENS(overrides?: CallOverrides): Promise<BigNumber>;
-
     approve(
       to: string,
       tokenId: BigNumberish,
@@ -588,8 +575,6 @@ export class RandomSoundsNFT extends BaseContract {
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<BigNumber>;
-
-    getPrice(overrides?: CallOverrides): Promise<BigNumber>;
 
     isApprovedForAll(
       owner: string,
@@ -636,6 +621,11 @@ export class RandomSoundsNFT extends BaseContract {
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<BigNumber>;
 
+    setPrice(
+      _price: BigNumberish,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<BigNumber>;
+
     supportsInterface(
       interfaceId: BytesLike,
       overrides?: CallOverrides
@@ -676,8 +666,6 @@ export class RandomSoundsNFT extends BaseContract {
   };
 
   populateTransaction: {
-    MAX_TOKENS(overrides?: CallOverrides): Promise<PopulatedTransaction>;
-
     approve(
       to: string,
       tokenId: BigNumberish,
@@ -698,8 +686,6 @@ export class RandomSoundsNFT extends BaseContract {
       tokenId: BigNumberish,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
-
-    getPrice(overrides?: CallOverrides): Promise<PopulatedTransaction>;
 
     isApprovedForAll(
       owner: string,
@@ -743,6 +729,11 @@ export class RandomSoundsNFT extends BaseContract {
     setApprovalForAll(
       operator: string,
       approved: boolean,
+      overrides?: Overrides & { from?: string | Promise<string> }
+    ): Promise<PopulatedTransaction>;
+
+    setPrice(
+      _price: BigNumberish,
       overrides?: Overrides & { from?: string | Promise<string> }
     ): Promise<PopulatedTransaction>;
 

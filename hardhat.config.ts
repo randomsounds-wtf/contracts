@@ -1,6 +1,5 @@
 // hardhat.config.ts
 import { HardhatUserConfig } from 'hardhat/types'
-import { task } from 'hardhat/config'
 import { config as dotEnvConfig } from 'dotenv'
 
 dotEnvConfig()
@@ -8,6 +7,7 @@ dotEnvConfig()
 import '@typechain/hardhat'
 import '@nomiclabs/hardhat-ethers'
 import '@nomiclabs/hardhat-waffle'
+import 'hardhat-gas-reporter'
 
 // TODO: reenable solidity-coverage when it works
 // import "solidity-coverage";
@@ -36,18 +36,14 @@ const config: HardhatUserConfig = {
       gas: 8000000,
       gasPrice: 1
     },
-    ropsten: {
-      url: 'https://ropsten.infura.io/v3/08791951999a4e71b9ba5ae174126de5',
-      chainId: 3,
-      accounts: [PRIVATE_KEY]
-    },
-    /* mumbai: {
-      url: 'https://rpc-mumbai.maticvigil.com',
+    polygon: {
+      url: 'https://polygon-mainnet.infura.io/v3/08791951999a4e71b9ba5ae174126de5',
       accounts: [PRIVATE_KEY],
-      chainId: 80001
-    }, */
+      chainId: 137
+    },
     localhost: {}
-  }
+  },
+  gasReporter: { gasPrice: 25, currency: 'USD' }
 }
 
 export default config
