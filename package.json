@@ -1,6 +1,6 @@
 {
   "name": "@randomsounds/contracts",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "description": "📜 Solidity contract for random sounds NFT",
   "main": "RandomSoundsNFT.sol",
   "scripts": {
