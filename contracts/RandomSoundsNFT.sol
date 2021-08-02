@@ -111,10 +111,4 @@ contract RandomSoundsNFT is ERC721, Ownable, ERC721URIStorage {
     function setPrice(uint256 _price) public onlyOwner {
         price = _price;
     }
-
-    // withdraw bobux from contract
-    function withdrawAll() public onlyOwner {
-        uint256 balance = address(this).balance;
-        payable(msg.sender).transfer(balance);
-    }
 }
