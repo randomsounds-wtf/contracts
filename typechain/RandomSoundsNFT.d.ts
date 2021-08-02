@@ -24,6 +24,7 @@ interface RandomSoundsNFTInterface extends ethers.utils.Interface {
   functions: {
     "approve(address,uint256)": FunctionFragment;
     "balanceOf(address)": FunctionFragment;
+    "c_0x47e4a5ec(bytes32)": FunctionFragment;
     "claim(uint256)": FunctionFragment;
     "getApproved(uint256)": FunctionFragment;
     "isApprovedForAll(address,address)": FunctionFragment;
@@ -50,6 +51,10 @@ interface RandomSoundsNFTInterface extends ethers.utils.Interface {
     values: [string, BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "balanceOf", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "c_0x47e4a5ec",
+    values: [BytesLike]
+  ): string;
   encodeFunctionData(functionFragment: "claim", values: [BigNumberish]): string;
   encodeFunctionData(
     functionFragment: "getApproved",
@@ -114,6 +119,10 @@ interface RandomSoundsNFTInterface extends ethers.utils.Interface {
 
   decodeFunctionResult(functionFragment: "approve", data: BytesLike): Result;
   decodeFunctionResult(functionFragment: "balanceOf", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "c_0x47e4a5ec",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(functionFragment: "claim", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "getApproved",
@@ -232,6 +241,11 @@ export class RandomSoundsNFT extends BaseContract {
 
     balanceOf(owner: string, overrides?: CallOverrides): Promise<[BigNumber]>;
 
+    c_0x47e4a5ec(
+      c__0x47e4a5ec: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<[void]>;
+
     claim(
       _tokenId: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
@@ -339,6 +353,11 @@ export class RandomSoundsNFT extends BaseContract {
 
   balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
 
+  c_0x47e4a5ec(
+    c__0x47e4a5ec: BytesLike,
+    overrides?: CallOverrides
+  ): Promise<void>;
+
   claim(
     _tokenId: BigNumberish,
     overrides?: PayableOverrides & { from?: string | Promise<string> }
@@ -439,6 +458,11 @@ export class RandomSoundsNFT extends BaseContract {
     ): Promise<void>;
 
     balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
+
+    c_0x47e4a5ec(
+      c__0x47e4a5ec: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<void>;
 
     claim(_tokenId: BigNumberish, overrides?: CallOverrides): Promise<void>;
 
@@ -566,6 +590,11 @@ export class RandomSoundsNFT extends BaseContract {
 
     balanceOf(owner: string, overrides?: CallOverrides): Promise<BigNumber>;
 
+    c_0x47e4a5ec(
+      c__0x47e4a5ec: BytesLike,
+      overrides?: CallOverrides
+    ): Promise<BigNumber>;
+
     claim(
       _tokenId: BigNumberish,
       overrides?: PayableOverrides & { from?: string | Promise<string> }
@@ -674,6 +703,11 @@ export class RandomSoundsNFT extends BaseContract {
 
     balanceOf(
       owner: string,
+      overrides?: CallOverrides
+    ): Promise<PopulatedTransaction>;
+
+    c_0x47e4a5ec(
+      c__0x47e4a5ec: BytesLike,
       overrides?: CallOverrides
     ): Promise<PopulatedTransaction>;
 

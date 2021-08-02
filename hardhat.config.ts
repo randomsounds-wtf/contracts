@@ -9,8 +9,7 @@ import '@nomiclabs/hardhat-ethers'
 import '@nomiclabs/hardhat-waffle'
 import 'hardhat-gas-reporter'
 
-// TODO: reenable solidity-coverage when it works
-// import "solidity-coverage";
+import 'solidity-coverage'
 const PRIVATE_KEY = process.env.PRIVATE_KEY || ''
 
 const config: HardhatUserConfig = {

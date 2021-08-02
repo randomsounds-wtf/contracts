@@ -105,3 +105,4 @@ dist
 
 cache
 artifacts
+coverage.json
