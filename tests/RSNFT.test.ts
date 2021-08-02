@@ -25,12 +25,15 @@ describe('NFT', () => {
     await Promise.all(promises)
   })
 
-  /*   describe('Standard functions', () => {
+  describe('Standard functions', () => {
     it('Initial contract balance should be 50', async () => {
       const bal = await NFTContract.balanceOf(owner.address)
       assert.strictEqual(bal.toNumber(), 50)
     })
-  }) */
+    it(`tokenURI(...) should return token's minted URI`, async () => {
+      assert.strictEqual(await NFTContract.tokenURI(1), 'QmWfzvHK9yPR7jpEiovDejMspkjkKzFQPUMC7h3fZKuCye')
+    })
+  })
 
   describe('Custom functions', () => {
     describe('tokenIdsByOwner(_owner) ', () => {
@@ -66,6 +69,9 @@ describe('NFT', () => {
           [2, 8, 12]
         )
       })
+      it('should return an empty array if none of the tokens are owned', async () => {
+        assert.deepStrictEqual(await NFTContract.tokenIdsByOwner(addr1.address), [])
+      })
     })
     describe('tokenURIsAndIDsByOwner()', () => {
       it('should return an array of structs with IDs and URIs', async () => {
@@ -100,6 +106,9 @@ describe('NFT', () => {
           })),
           mockIDs
         )
+      })
+      it('should return an empty array if none of the tokens are owned', async () => {
+        assert.deepStrictEqual(await NFTContract.tokenURIsAndIDsByOwner(addr1.address), [])
       })
     })
   })

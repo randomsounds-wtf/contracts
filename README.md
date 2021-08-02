@@ -2,7 +2,7 @@
 
 # @randomsounds/contracts
 
-[![Version][v-badge-url]][npm-url] [![Downloads][dl-badge-url]][npm-url] [![GitHub Workflow Status][gh-actions-img]][github-actions]
+[![Version][v-badge-url]][npm-url] [![Downloads][dl-badge-url]][npm-url] [![GitHub Workflow Status][gh-actions-img]][github-actions] [![Coverage][cov-badge-url]][cov-url]
 
 </div>
 
@@ -44,3 +44,5 @@ import type { RandomSoundsNFT } from '@randomsounds/contracts'
 [dl-badge-url]: https://img.shields.io/npm/dt/@randomsounds/contracts?style=for-the-badge&color=black
 [github-actions]: https://github.com/randomsounds-wtf/contracts/actions
 [gh-actions-img]: https://img.shields.io/github/workflow/status/randomsounds-wtf/contracts/CI?style=for-the-badge&color=black&label=&logo=github
+[cov-badge-url]: https://img.shields.io/coveralls/github/randomsounds-wtf/contracts?style=for-the-badge&color=black
+[cov-url]: https://coveralls.io/github/randomsounds-wtf/contracts
