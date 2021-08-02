@@ -1,4 +1,6 @@
 <div align="center">
+ 
+ <img src="https://www.randomsounds.wtf/cover.jpg" alt="Cover" />
 
 # @randomsounds/contracts
 
