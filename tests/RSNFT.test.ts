@@ -137,9 +137,11 @@ describe('NFT', () => {
         await NFTContract.transferFrom(owner.address, addr1.address, 2)
         const b1 = await owner.getBalance()
 
+        const value = ethers.utils.parseEther('120')
+
         assert.deepStrictEqual((await NFTContract.balanceOf(owner.address)).toNumber(), 49)
 
-        const tx = await NFTContract.claim(2, { value: ethers.utils.parseEther('120') })
+        const tx = await NFTContract.claim(2, { value })
 
         const receipt = tx.wait()
 
@@ -147,8 +149,28 @@ describe('NFT', () => {
 
         const b2 = await owner.getBalance()
 
-        assert.deepStrictEqual(b1.sub(gas).sub(BigNumber.from(ethers.utils.parseEther('120'))), b2)
+        assert.deepStrictEqual(b1.sub(gas).sub(BigNumber.from(value)), b2)
         assert.deepStrictEqual((await NFTContract.balanceOf(owner.address)).toNumber(), 50)
+      })
+    })
+    describe('setPrice(price)', () => {
+      it('changes default price', async () => {
+        const value = ethers.utils.parseEther('0.05')
+        await NFTContract.setPrice(BigNumber.from(value))
+        await NFTContract.transferFrom(owner.address, addr1.address, 2)
+        const b1 = await owner.getBalance()
+
+        assert.deepStrictEqual((await NFTContract.balanceOf(owner.address)).toNumber(), 49)
+
+        const tx = await NFTContract.claim(2, { value })
+
+        const receipt = tx.wait()
+
+        const gas = (await receipt).gasUsed.mul(tx.gasPrice!)
+
+        const b2 = await owner.getBalance()
+
+        assert.deepStrictEqual(b1.sub(gas).sub(BigNumber.from(value)), b2)
       })
     })
   })
