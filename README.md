@@ -12,7 +12,7 @@ Solidity contract for <a href="https://randomsounds.wtf"><code>RAND0M S0UNDS NFT
 
 ## Addresses
 
-- Contract address: [`0xF66770253dfC078d6a3844e0c4738d2ff5006E5D`](https://polygonscan.com/token/0xf66770253dfc078d6a3844e0c4738d2ff5006e5d?a=0x0A9f12d325b905907C43566b4740F2dFE10C3C4B)
+- Contract address: [`0xF66770253dfC078d6a3844e0c4738d2ff5006E5D`](https://polygonscan.com/token/0xf66770253dfc078d6a3844e0c4738d2ff5006e5d)
 - Deployer address: `0x0A9f12d325b905907C43566b4740F2dFE10C3C4B`
 
 ## Install
