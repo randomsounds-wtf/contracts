@@ -1,5 +1,5 @@
 import assert from 'assert'
-import { Contract } from 'ethers'
+import { BigNumber, Contract } from 'ethers'
 import { ethers } from 'hardhat'
 import { SignerWithAddress } from '@nomiclabs/hardhat-ethers/signers'
 import { nfts } from '../scripts/nfts'
@@ -132,6 +132,23 @@ describe('NFT', () => {
             `VM Exception while processing transaction: reverted with reason string 'Non-existent address or already an owner'`
           )
         }
+      })
+      it('should take 120 MATIC from an address and transfer the NFT', async () => {
+        await NFTContract.transferFrom(owner.address, addr1.address, 2)
+        const b1 = await owner.getBalance()
+
+        assert.deepStrictEqual((await NFTContract.balanceOf(owner.address)).toNumber(), 49)
+
+        const tx = await NFTContract.claim(2, { value: ethers.utils.parseEther('120') })
+
+        const receipt = tx.wait()
+
+        const gas = (await receipt).gasUsed.mul(tx.gasPrice!)
+
+        const b2 = await owner.getBalance()
+
+        assert.deepStrictEqual(b1.sub(gas).sub(BigNumber.from(ethers.utils.parseEther('120'))), b2)
+        assert.deepStrictEqual((await NFTContract.balanceOf(owner.address)).toNumber(), 50)
       })
     })
   })

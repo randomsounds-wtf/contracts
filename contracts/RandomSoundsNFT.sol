@@ -62,7 +62,7 @@ contract RandomSoundsNFT is ERC721, Ownable, ERC721URIStorage {
 
         address _owner = ownerOf(_tokenId);
 
-        payable(_owner).transfer(msg.value); // pay 110 MATIC to owner
+        payable(_owner).transfer(msg.value); // pay 120 MATIC to owner
 
         setApprovalForAll(_owner, true); // approve buying NFTs
         _transfer(_owner, msg.sender, _tokenId); // transfer NFT
