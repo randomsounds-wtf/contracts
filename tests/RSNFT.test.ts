@@ -111,5 +111,28 @@ describe('NFT', () => {
         assert.deepStrictEqual(await NFTContract.tokenURIsAndIDsByOwner(addr1.address), [])
       })
     })
+    describe('claim(tokenId)', () => {
+      it('should throw an error on invalid sent value', async () => {
+        await NFTContract.transferFrom(owner.address, addr1.address, 2)
+        try {
+          await NFTContract.claim(2, { value: ethers.utils.parseEther('0.2') })
+        } catch (e) {
+          assert.strictEqual(
+            e.message,
+            `VM Exception while processing transaction: reverted with reason string 'Invalid sent value'`
+          )
+        }
+      })
+      it('should throw if already an owner', async () => {
+        try {
+          await NFTContract.claim(2, { value: ethers.utils.parseEther('120') })
+        } catch (e) {
+          assert.strictEqual(
+            e.message,
+            `VM Exception while processing transaction: reverted with reason string 'Non-existent address or already an owner'`
+          )
+        }
+      })
+    })
   })
 })
